@@ -17,7 +17,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({"spring.web.application.portal.config"})
+//@ComponentScan({"spring.web.application.portal.config"})
 @PropertySource(value = {"classpath:application.properties"})
 public class HibernateConfig {
     @Autowired

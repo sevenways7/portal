@@ -1,5 +1,6 @@
 package spring.web.application.portal.config;
 
+import org.springframework.web.SpringServletContainerInitializer;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
