@@ -3,7 +3,6 @@ package spring.web.application.portal.config;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -17,11 +16,19 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-//@ComponentScan({"spring.web.application.portal.config"})
 @PropertySource(value = {"classpath:application.properties"})
 public class HibernateConfig {
     @Autowired
     private Environment environment;
+    // If table not exist in database, we will get error:
+
+    // Error creating bean with name 'sessionFactory'
+    // defined in class path resource [spring/web/application/portal/config/HibernateConfig.class]:
+    // Invocation of init method failed;
+    // nested exception is org.hibernate.HibernateException: Missing table: comment
+
+    // So, during creating "sessionFactory", Spring checks database for exist requirement tables!
+    // What tables need to be present, defines in models, that are specified in "sessionFactory.setPackagesToScan()"
 
     @Bean
     public LocalSessionFactoryBean sessionFactory() {

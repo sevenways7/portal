@@ -1,0 +1,12 @@
+version.number=@application.version.number@
+
+jdbc.driverClassName = com.mysql.cj.jdbc.Driver
+jdbc.url = jdbc:mysql://localhost:3306/mydatabase
+jdbc.username = root
+jdbc.password = root
+
+hibernate.dialect = org.hibernate.dialect.MySQLDialect
+hibernate.archive.autodetection = class,hbm
+hibernate.hbm2ddl.auto = validate
+hibernate.show_sql = false
+hibernate.format_sql = false

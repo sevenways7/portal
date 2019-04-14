@@ -5,54 +5,94 @@
 <t:main>
     <jsp:attribute name="title">Test portal.</jsp:attribute>
     <jsp:body>
-        <div class="top-margin">
-            <h3>Please take a few minutes and leave a comment.</h3>
-        </div>
+        <%--Form don't need here, but otherwise
+        "form .aui" selector not triggers--%>
+        <form class="aui">
+            <!-- Manage post dialog-->
+            <div id="edit-delete-post-dialog" class="edit-delete-post-modal">
+                <!-- Modal content -->
+                <div class="edit-delete-post-modal-content">
+                    <h3>
+                        <div id="post-dialog-header" class="dialog-header-padding">Edit.</div>
+                    </h3>
 
-        <div class="scroll-box-layer">
-            <table class="aui">
-                <thead>
-                </thead>
-                <tbody id="comment-list">
-                <c:forEach items="${commentList}" var="comment">
-                    <tr>
-                        <td id="${comment.id}-comment-date">
-                            <div>
-                                    ${comment.date}
-                            </div>
-                            <div>
-                                    ${comment.comment}
-                            </div>
-
-                        </td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="content">
-            <div class="comments">
-                <div class="editor">
-                    <div class="editor-header">
-                        <a href='#' data-role='bold'>B</a>
-                        <a href='#' data-role='italic'>I</a>
-                        <a href='#' data-role='underline'>U</a>
-                        <a href='#' data-role='justifyleft'><i class="menu-left"></i></a>
-                        <a href='#' data-role='justifycenter'><i class="menu-center"></i></a>
-                        <a href='#' data-role='justifyright'><i class="menu-right"></i></a>
+                    <div>
+                        <textarea id="post-text" class="textarea text-area-settings"></textarea>
                     </div>
-                    <div id="text" class="editor-content" contenteditable>
-                        <p>Enter comment here.</p>
+
+                    <input type="hidden" id="post-id" value="">
+
+                    <div class="button-container">
+                        <span>
+                            <div id="save-post-dialog" class="aui-button edit-delete-post-modal-close">Save</div>
+                            <div id="delete-post-dialog" class="aui-button edit-delete-post-modal-close">Delete</div>
+                            <div id="close-post-dialog" class="aui-button edit-delete-post-modal-close">Close</div>
+                        </span>
                     </div>
-                </div>
-                <div class="insert-text">
-                    <p>
-                        <input type="submit" value="Comment"/>
-                    </p>
                 </div>
             </div>
-        </div>
+
+            <!-- Manage comment dialog-->
+            <div id="edit-delete-comment-dialog" class="edit-delete-post-modal">
+                <!-- Modal content -->
+                <div class="edit-delete-post-modal-content">
+                    <h3>
+                        <div id="comment-dialog-header" class="dialog-header-padding">Edit.</div>
+                    </h3>
+
+                    <div>
+                        <textarea id="comment-text" class="textarea text-area-settings"></textarea>
+                    </div>
+
+                    <input type="hidden" id="post-comment-id" post-id="" comment-id="" value="">
+
+                    <div class="button-container">
+                        <span>
+                            <div id="save-comment-dialog" class="aui-button edit-delete-post-modal-close">Save</div>
+                            <div id="delete-comment-dialog" class="aui-button edit-delete-post-modal-close">Delete</div>
+                            <div id="close-comment-dialog" class="aui-button edit-delete-post-modal-close">Close</div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="aui post-comment-container">
+                <div class="create-post-button-container">
+                    <div id="create-post-main-window" class="aui-button">Create post.</div>
+                </div>
+
+                <c:set var="postCount" value="${0}"/>
+                <c:forEach items="${postList}" var="postItem">
+                    <c:set var="postCount" value="${postCount+1}"/>
+                    <div><P>${postCount}.</P></div>
+
+                    <div class="post-container">
+                        <div class="post-border">
+                            <div id="posted-text-${postItem.id}" class="manage-post">
+                                <p>${postItem.text}</p>
+                            </div>
+                        </div>
+
+                        <div class="add-post-button-container">
+                            <div id="add-comment-${postItem.id}" class="add-comment-to-post aui-button">Add
+                                comment.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comment-container">
+                        <c:forEach items="${postItem.comments}" var="commentItem">
+                            <div class="comment-border">
+                                <div class="manage-comment"
+                                     id="commented-text-${postItem.id}-${commentItem.id}">
+                                    <p>${commentItem.text}</p>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </c:forEach>
+            </div>
+        </form>
     </jsp:body>
 </t:main>
 

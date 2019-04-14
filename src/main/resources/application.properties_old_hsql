@@ -1,0 +1,12 @@
+version.number=@application.version.number@
+
+jdbc.driverClassName = org.hsqldb.jdbc.JDBCDriver
+jdbc.url = jdbc:hsqldb:file:pbase/ppath
+jdbc.username = PortalAdmin
+jdbc.password = hkUh6T0J
+
+hibernate.dialect = org.hibernate.dialect.HSQLDialect
+hibernate.archive.autodetection = class,hbm
+hibernate.hbm2ddl.auto = create
+hibernate.show_sql = false
+hibernate.format_sql = false
